@@ -1,0 +1,59 @@
+<h2>Biểu đồ giá vàng theo tháng</h2>
+<canvas id="goldChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('goldChart').getContext('2d');
+    const goldChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ months|tojson }},
+            datasets: [{
+                label: 'Giá vàng (VNĐ)',
+                data: {{ gold_prices|tojson }},
+                borderColor: 'gold',
+                backgroundColor: 'rgba(255, 215, 0, 0.2)',
+                borderWidth: 2,
+                tension: 0.3,
+                fill: true,
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+</script>
+
+<h2>Biểu đồ tỷ giá USD theo tháng</h2>
+<canvas id="usdChart" width="400" height="200"></canvas>
+
+<script>
+    const usdCtx = document.getElementById('usdChart').getContext('2d');
+    const usdChart = new Chart(usdCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ months|tojson }},
+            datasets: [{
+                label: 'Tỷ giá USD/VND',
+                data: {{ usd_rates|tojson }},
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+</script>
+
